@@ -33,6 +33,7 @@ _ReSharper*/
 *.vsp
 *.vspx
 *.sap
+*.development.json
 
 # Other files and folders
 packages/
