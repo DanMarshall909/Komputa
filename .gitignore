@@ -1,0 +1,71 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.dotcover
+
+# User-specific files for Rider
+.idea/
+*.sln.iml
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Tooling
+_ReSharper*/
+*.[Rr]eSharper
+*.Test
+*.DotSettings.user
+
+# Project files
+*.csproj.user
+*.pubxml
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Other files and folders
+packages/
+*.ncrunch*
+*.ntvs*
+*.njsproj
+*.sln.ide
+*.mdf
+*.ldf
+*.ndf
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.tlog
+*.log
+*.vspscc
+*.vssscc
+*.scc
+
+# Backup & report files from merging tools
+*.bak
+*.swp
+*.orig
+
+# OS generated files
+.DS_Store
+Thumbs.db
