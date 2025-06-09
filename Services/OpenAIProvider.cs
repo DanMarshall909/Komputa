@@ -11,24 +11,31 @@ public class OpenAIProvider : ILanguageModelProvider
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
     private readonly string _model;
+    private readonly bool _enableFunctionCalling;
+    private readonly int _maxTokens;
     private readonly ILogger<OpenAIProvider> _logger;
+    private readonly IWebSearchService _webSearchService;
 
     public string ProviderName => "OpenAI";
 
     public bool IsAvailable => !string.IsNullOrEmpty(_apiKey);
 
-    public OpenAIProvider(HttpClient httpClient, IConfiguration configuration, ILogger<OpenAIProvider> logger)
+    public OpenAIProvider(HttpClient httpClient, IConfiguration configuration, ILogger<OpenAIProvider> logger, IWebSearchService webSearchService)
     {
         _httpClient = httpClient;
         _apiKey = configuration["OpenAI:ApiKey"] ?? string.Empty;
-        _model = configuration["OpenAI:Model"] ?? "gpt-4";
+        _model = configuration["OpenAI:Model"] ?? "gpt-4o";
+        _enableFunctionCalling = configuration.GetValue<bool>("OpenAI:EnableFunctionCalling", false);
+        _maxTokens = configuration.GetValue<int>("OpenAI:MaxTokens", 1000);
         _logger = logger;
+        _webSearchService = webSearchService;
         
         if (!string.IsNullOrEmpty(_apiKey))
         {
             _httpClient.DefaultRequestHeaders.Authorization = 
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
-            _logger.LogInformation("OpenAI provider initialized with model {Model}", _model);
+            _logger.LogInformation("OpenAI provider initialized with model {Model}, Function calling: {FunctionCalling}, Max tokens: {MaxTokens}", 
+                _model, _enableFunctionCalling, _maxTokens);
         }
         else
         {

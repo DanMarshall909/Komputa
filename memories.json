@@ -20,5 +20,181 @@
       "greeting"
     ],
     "conversationId": "7489a1f6-e58e-450f-90ea-f76e14ae5e6e"
+  },
+  {
+    "id": "962ab334-c71d-4354-9519-f99bd92cf112",
+    "content": "what is the latest news in 100 words or less",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:38:20.2026626Z",
+    "importance": 0.4,
+    "tags": [
+      "question"
+    ],
+    "conversationId": "c4d95009-a1b1-48aa-bd2a-d95f4aefa5cd"
+  },
+  {
+    "id": "c1fcfa1e-03aa-4756-868a-787f24cc74ea",
+    "content": "As an AI model developed by OpenAI, I don\u0027t have the ability to access real-time data or news updates. I suggest checking the latest headlines on a reputable news website or on news channels for the most recent information. Should you need summarization or understanding about a specific news, feel free to ask!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:38:23.9817825Z",
+    "importance": 0.3,
+    "tags": [
+      "question"
+    ],
+    "conversationId": "c4d95009-a1b1-48aa-bd2a-d95f4aefa5cd"
+  },
+  {
+    "id": "6e3c8033-0f55-42df-8ab5-bcdbfb88aaa8",
+    "content": "quit",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:38:45.7233683Z",
+    "importance": 0.4,
+    "tags": [],
+    "conversationId": "c4d95009-a1b1-48aa-bd2a-d95f4aefa5cd"
+  },
+  {
+    "id": "95cadd78-b9cc-4996-a73e-ee39e80109ea",
+    "content": "Understood. If you have any more questions in the future, don\u0027t hesitate to ask. Have a great day, goodbye!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:38:46.9747147Z",
+    "importance": 0.3,
+    "tags": [],
+    "conversationId": "c4d95009-a1b1-48aa-bd2a-d95f4aefa5cd"
+  },
+  {
+    "id": "e00e2d58-35ea-464a-9780-34e19808fb57",
+    "content": "what is in todays news?",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:43:12.1393396Z",
+    "importance": 0.4,
+    "tags": [
+      "question"
+    ],
+    "conversationId": "b056fa18-fee3-4fcd-8b97-dd2973cd0fc1"
+  },
+  {
+    "id": "986a4768-5157-4a10-8918-687f2d5a3ce8",
+    "content": "I don\u0027t have the ability to access real-time news updates or browse the internet for current events. To get the latest news, I recommend checking a reputable news website or news app. If you have any questions about a specific topic or need help understanding something, feel free to ask!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:43:13.8833717Z",
+    "importance": 0.3,
+    "tags": [
+      "question"
+    ],
+    "conversationId": "b056fa18-fee3-4fcd-8b97-dd2973cd0fc1"
+  },
+  {
+    "id": "d60cd3fa-fa4c-4627-be20-352e520d55db",
+    "content": "what is in today\u0027s news?",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:46:04.2858057Z",
+    "importance": 0.4,
+    "tags": [
+      "question",
+      "news"
+    ],
+    "conversationId": "2a4c2e3e-b0a7-4c55-9cf2-f497f562313b"
+  },
+  {
+    "id": "06470e16-dc0f-413c-9db0-cf12ae3cda61",
+    "content": "I currently do not have access to real-time news or current events. To find out what\u0027s in today\u0027s news, I recommend visiting a reputable news website, checking a news app, or tuning into a news broadcast. If you have questions about a specific topic you\u0027re interested in, feel free to ask, and I\u0027ll do my best to help!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:46:06.3242758Z",
+    "importance": 0.3,
+    "tags": [
+      "question",
+      "news"
+    ],
+    "conversationId": "2a4c2e3e-b0a7-4c55-9cf2-f497f562313b"
+  },
+  {
+    "id": "7f9f5242-2721-41b3-8c09-64a3e20182d5",
+    "content": "hi",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:48:50.1243985Z",
+    "importance": 0.4,
+    "tags": [
+      "greeting"
+    ],
+    "conversationId": "76913619-28ae-47bf-a9c9-f2edbd33ba0e"
+  },
+  {
+    "id": "eaa92c92-d9a4-4fe8-a0db-5f953ee84efb",
+    "content": "Hello again! How can I assist you today?",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:48:51.0699979Z",
+    "importance": 0.3,
+    "tags": [
+      "greeting"
+    ],
+    "conversationId": "76913619-28ae-47bf-a9c9-f2edbd33ba0e"
+  },
+  {
+    "id": "568fd016-f141-475f-bab3-caad7af6711c",
+    "content": "Whats the weather today?",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:48:56.1945233Z",
+    "importance": 0.4,
+    "tags": [
+      "weather",
+      "question",
+      "news"
+    ],
+    "conversationId": "76913619-28ae-47bf-a9c9-f2edbd33ba0e"
+  },
+  {
+    "id": "d56ce3f6-b459-4b9e-ba0b-8f78dd876a0d",
+    "content": "I\u0027m unable to provide real-time weather information. To find out the current weather, you can check a weather website, use a weather app, or search for the weather in your specific location on a search engine. If there\u0027s anything else you\u0027d like to know, feel free to ask!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:48:57.7902065Z",
+    "importance": 0.3,
+    "tags": [
+      "weather",
+      "question",
+      "news"
+    ],
+    "conversationId": "76913619-28ae-47bf-a9c9-f2edbd33ba0e"
+  },
+  {
+    "id": "44e6f996-7c35-49cd-9dcc-0c45f3e0776a",
+    "content": "what\u0027s the weather?",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:53:15.0623036Z",
+    "importance": 0.4,
+    "tags": [
+      "weather",
+      "question"
+    ],
+    "conversationId": "be184fc1-f96b-4e79-b7a0-2d90b52fa3ed"
+  },
+  {
+    "id": "40de0219-3aa9-4c4c-9ca2-c098fe00d2f1",
+    "content": "Unfortunately, I can\u0027t provide real-time weather updates. I recommend checking a weather website, using a weather app, or searching for the weather in your location using a search engine for the most accurate and up-to-date information. If there\u0027s anything else I can do to assist you, please let me know!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:53:16.3746163Z",
+    "importance": 0.3,
+    "tags": [
+      "weather",
+      "question"
+    ],
+    "conversationId": "be184fc1-f96b-4e79-b7a0-2d90b52fa3ed"
+  },
+  {
+    "id": "50a8a71b-513c-42ee-bfae-06edea35db89",
+    "content": "quit",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:53:20.3831352Z",
+    "importance": 0.4,
+    "tags": [],
+    "conversationId": "be184fc1-f96b-4e79-b7a0-2d90b52fa3ed"
+  },
+  {
+    "id": "aef86bb5-69b9-49a3-a5ff-08e7e0f5d9b3",
+    "content": "If you have any questions in the future or need assistance, feel free to reach out. Have a great day!",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:53:21.3048271Z",
+    "importance": 0.3,
+    "tags": [],
+    "conversationId": "be184fc1-f96b-4e79-b7a0-2d90b52fa3ed"
   }
 ]

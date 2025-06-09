@@ -42,6 +42,7 @@ class Program
                 .AddHttpClient()
                 .AddSingleton<IMemoryStore, JsonMemoryStore>()
                 .AddSingleton<IContentScorer, VoiceAssistantContentScorer>()
+                .AddSingleton<IWebSearchService, WebSearchService>()
                 .AddSingleton<ILanguageModelProvider, OpenAIProvider>()
                 .AddSingleton<MemoryAwareConversationService>()
                 .BuildServiceProvider();
@@ -71,29 +72,43 @@ class Program
 
             while (true)
             {
-                Console.Write("You: ");
-                string? input = Console.ReadLine();
-
-                if (string.IsNullOrWhiteSpace(input))
-                    continue;
-
-                if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
-                {
-                    logger.Information("User exited application");
-                    Console.WriteLine("👋 Goodbye!");
-                    break;
-                }
-
-                if (input.Equals("memory", StringComparison.OrdinalIgnoreCase))
-                {
-                    var memoryStatus = await conversationService.GetMemoryStatusAsync();
-                    logger.Information("Memory status requested: {Status}", memoryStatus);
-                    Console.WriteLine($"💭 Memory Status: {memoryStatus}");
-                    continue;
-                }
-
                 try
                 {
+                    Console.Write("You: ");
+                    string? input = Console.ReadLine();
+
+                    // Add explicit null check and logging
+                    if (input == null)
+                    {
+                        logger.Warning("Console.ReadLine() returned null - possible input stream issue");
+                        Console.WriteLine("⚠️  Input stream error. Please try again or type 'exit' to quit.");
+                        await Task.Delay(1000); // Prevent rapid loop if there's a persistent issue
+                        continue;
+                    }
+
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        logger.Debug("Empty input received, prompting again");
+                        continue;
+                    }
+
+                    logger.Debug("User input received: {InputLength} characters", input.Length);
+
+                    if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
+                    {
+                        logger.Information("User exited application");
+                        Console.WriteLine("👋 Goodbye!");
+                        break;
+                    }
+
+                    if (input.Equals("memory", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var memoryStatus = await conversationService.GetMemoryStatusAsync();
+                        logger.Information("Memory status requested: {Status}", memoryStatus);
+                        Console.WriteLine($"💭 Memory Status: {memoryStatus}");
+                        continue;
+                    }
+
                     logger.Information("User input: {Input}", input);
                     string response = await conversationService.GetResponseWithMemoryAsync(input);
                     logger.Information("AI response generated successfully");
@@ -101,8 +116,11 @@ class Program
                 }
                 catch (Exception ex)
                 {
-                    logger.Error(ex, "Error processing user input: {Input}", input);
-                    Console.WriteLine($"❌ Error: {ex.Message}");
+                    logger.Error(ex, "Error in main conversation loop");
+                    Console.WriteLine($"❌ Loop Error: {ex.Message}");
+                    
+                    // Add a small delay to prevent rapid error loops
+                    await Task.Delay(1000);
                 }
             }
         }
