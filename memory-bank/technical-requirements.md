@@ -33,6 +33,21 @@
 - Time-based memory decay
 - Tag-based organization
 
+#### Modular AI Provider Dependencies
+```xml
+<!-- Multi-provider AI support -->
+<PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+<PackageReference Include="System.Text.Json" Version="8.0.0" />
+<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="8.0.0" />
+```
+**Purpose**: Flexible AI provider architecture supporting local and cloud models
+**Features Needed**:
+- Provider abstraction and factory patterns
+- Configuration management for multiple providers
+- HTTP client management with retry policies
+- JSON serialization for API communication
+
 #### Microsoft Cognitive Services Speech SDK
 ```xml
 <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.34.0" />

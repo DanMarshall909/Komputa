@@ -5,14 +5,16 @@
 ### Phase 1: Voice Foundation + Memory Integration (5-7 weeks)
 **Goal**: Transform console app into memory-aware voice assistant
 
-#### 1.1 dRAGster Integration (Week 1-2)
+#### 1.1 dRAGster + Modular AI Integration (Week 1-2)
 - **Integrate dRAGster.Core and dRAGster.Application into Komputa**
 - **Update dependency injection to include dRAGster services**
+- **Implement modular AI provider architecture (ILanguageModelProvider interface)**
+- **Add Ollama and OpenAI provider implementations**
 - **Configure JSON persistence for conversation memory**
-- **Implement MemoryAwareConversationService**
-- **Test basic memory storage and retrieval**
+- **Implement MemoryAwareConversationService with provider selection**
+- **Test basic memory storage and retrieval with multiple AI providers**
 
-**Deliverable**: Console app with conversation memory capabilities
+**Deliverable**: Console app with conversation memory and modular AI support (Ollama + OpenAI)
 
 #### 1.2 Speech Recognition Integration (Week 2-3)
 - **Add Microsoft Cognitive Services Speech SDK**
