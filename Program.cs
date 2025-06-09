@@ -13,13 +13,20 @@ class Program
     static async Task Main()
     {
         // Load configuration
-        var config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .Build();
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+        var configBuilder = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+        if (environment == "Development")
+        {
+            configBuilder.AddJsonFile("appsettings.development.json", optional: true, reloadOnChange: true);
+        }
+
+        var config = configBuilder.Build();
 
         // Set up dependency injection
         var services = new ServiceCollection()
-            .AddSingleton(config)
+            .AddSingleton<IConfiguration>(config)
             .AddHttpClient()
             .AddSingleton<AssistantService>()
             .BuildServiceProvider();
