@@ -1,6 +1,3 @@
-using TechTalk.SpecFlow;
-using FluentAssertions;
-using Moq;
 using Microsoft.Extensions.Logging;
 using Komputa.Services;
 using Komputa.Interfaces;

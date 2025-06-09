@@ -44,8 +44,5 @@
     <Using Include="TechTalk.SpecFlow" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Komputa.csproj" />
-  </ItemGroup>
 
 </Project>

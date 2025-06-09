@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Komputa.Models;
 
 namespace Komputa.Tests.Domain;
