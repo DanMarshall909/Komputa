@@ -70,3 +70,19 @@ packages/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Test artifacts
+TestResults/
+StrykerOutput/
+LivingDoc/
+coverage/
+*.coverage
+*.coveragexml
+.vs/
+.vscode/settings.json
+.vscode/launch.json
+
+# SpecFlow generated files
+**/bin/Debug/
+**/bin/Release/
+*.feature.cs

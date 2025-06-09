@@ -1,0 +1,17 @@
+{
+  "language": {
+    "feature": "en-us"
+  },
+  "bindingCulture": {
+    "name": "en-US"
+  },
+  "framework": {
+    "unitTestProvider": "xunit"
+  },
+  "trace": {
+    "traceSuccessfulSteps": true,
+    "traceTimings": false,
+    "minTracedDuration": "0:0:0.1",
+    "stepDefinitionSkeletonStyle": "MethodNameUnderscored"
+  }
+}
