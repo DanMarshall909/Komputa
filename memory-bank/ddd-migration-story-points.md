@@ -13,7 +13,6 @@ Migrate Komputa from current service-based architecture to Domain-Driven Design 
 
 ### Epic 1: Domain Foundation (21 points total)
 
-
 **Story 1.1**: Document Business Rules (3 points)
 - Extract memory scoring rules from `VoiceAssistantContentScorer`
 - Document conversation context building rules from `MemoryAwareConversationService`
