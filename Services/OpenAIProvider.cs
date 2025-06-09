@@ -2,6 +2,7 @@ using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using Komputa.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Komputa.Services;
 
@@ -10,21 +11,28 @@ public class OpenAIProvider : ILanguageModelProvider
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
     private readonly string _model;
+    private readonly ILogger<OpenAIProvider> _logger;
 
     public string ProviderName => "OpenAI";
 
     public bool IsAvailable => !string.IsNullOrEmpty(_apiKey);
 
-    public OpenAIProvider(HttpClient httpClient, IConfiguration configuration)
+    public OpenAIProvider(HttpClient httpClient, IConfiguration configuration, ILogger<OpenAIProvider> logger)
     {
         _httpClient = httpClient;
         _apiKey = configuration["OpenAI:ApiKey"] ?? string.Empty;
         _model = configuration["OpenAI:Model"] ?? "gpt-4";
+        _logger = logger;
         
         if (!string.IsNullOrEmpty(_apiKey))
         {
             _httpClient.DefaultRequestHeaders.Authorization = 
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", _apiKey);
+            _logger.LogInformation("OpenAI provider initialized with model {Model}", _model);
+        }
+        else
+        {
+            _logger.LogWarning("OpenAI provider initialized but no API key found");
         }
     }
 
@@ -32,13 +40,18 @@ public class OpenAIProvider : ILanguageModelProvider
     {
         if (!IsAvailable)
         {
+            _logger.LogWarning("OpenAI API call attempted but provider not available");
             return "OpenAI provider is not available - missing API key.";
         }
+
+        _logger.LogInformation("Starting OpenAI API call with model {Model}", _model);
+        _logger.LogDebug("User prompt: {Prompt}", prompt);
 
         var messages = new List<object> { new { role = "user", content = prompt } };
         
         if (context != null && context.Any())
         {
+            _logger.LogInformation("Including {ContextCount} context items in request", context.Count);
             var contextPrompt = "Here's some relevant context from our previous conversations:\n" + 
                                string.Join("\n", context) + "\n\nUser: " + prompt;
             messages = new List<object> { new { role = "user", content = contextPrompt } };
@@ -52,19 +65,31 @@ public class OpenAIProvider : ILanguageModelProvider
 
         try
         {
+            var stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var response = await _httpClient.PostAsJsonAsync("https://api.openai.com/v1/chat/completions", request);
+            stopwatch.Stop();
+
+            _logger.LogInformation("OpenAI API call completed in {ElapsedMs}ms with status {StatusCode}", 
+                stopwatch.ElapsedMilliseconds, response.StatusCode);
 
             if (!response.IsSuccessStatusCode)
             {
                 var errorContent = await response.Content.ReadAsStringAsync();
+                _logger.LogError("OpenAI API error: {StatusCode} - {ErrorContent}", response.StatusCode, errorContent);
                 return $"Error: {response.StatusCode} - {errorContent}";
             }
 
             var result = await response.Content.ReadFromJsonAsync<OpenAiResponse>();
-            return result?.Choices?.FirstOrDefault()?.Message?.Content ?? "No response";
+            var responseContent = result?.Choices?.FirstOrDefault()?.Message?.Content ?? "No response";
+            
+            _logger.LogInformation("OpenAI response received successfully, length: {ResponseLength} chars", responseContent.Length);
+            _logger.LogDebug("AI response: {Response}", responseContent);
+            
+            return responseContent;
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Exception during OpenAI API call");
             return $"Error calling OpenAI: {ex.Message}";
         }
     }
