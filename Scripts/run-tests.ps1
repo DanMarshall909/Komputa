@@ -163,35 +163,29 @@ function Generate-LivingDocs {
 }
 
 # Main execution logic
-try {
-    # Build solution first
-    Write-Host "🔨 Building solution..." -ForegroundColor Yellow
-    dotnet build
-    if ($LASTEXITCODE -ne 0) {
-        Write-Host "❌ Build failed" -ForegroundColor Red
-        exit 1
-    }
-    Write-Host "✅ Build successful" -ForegroundColor Green
-    
-    # Run tests based on parameters
-    if ($All -or (!$Unit -and !$BDD -and !$Integration -and !$Coverage -and !$Mutation)) {
-        Write-Host "🎯 Running all tests..." -ForegroundColor Cyan
-        Run-UnitTests
-        Run-BDDTests
-        Run-IntegrationTests
-        Generate-CoverageReport
-        Generate-LivingDocs
-    } else {
-        if ($Unit) { Run-UnitTests }
-        if ($BDD) { Run-BDDTests }
-        if ($Integration) { Run-IntegrationTests }
-        if ($Coverage) { Generate-CoverageReport }
-        if ($Mutation) { Run-MutationTesting }
-    }
-    
-    Write-Host "🎉 Test execution completed successfully!" -ForegroundColor Green
-    
-} catch {
-    Write-Host "💥 Test execution failed: $($_.Exception.Message)" -ForegroundColor Red
+# Build solution first
+Write-Host "🔨 Building solution..." -ForegroundColor Yellow
+dotnet build
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "❌ Build failed" -ForegroundColor Red
     exit 1
 }
+Write-Host "✅ Build successful" -ForegroundColor Green
+
+# Run tests based on parameters
+if ($All -or (!$Unit -and !$BDD -and !$Integration -and !$Coverage -and !$Mutation)) {
+    Write-Host "🎯 Running all tests..." -ForegroundColor Cyan
+    Run-UnitTests
+    Run-BDDTests
+    Run-IntegrationTests
+    Generate-CoverageReport
+    Generate-LivingDocs
+} else {
+    if ($Unit) { Run-UnitTests }
+    if ($BDD) { Run-BDDTests }
+    if ($Integration) { Run-IntegrationTests }
+    if ($Coverage) { Generate-CoverageReport }
+    if ($Mutation) { Run-MutationTesting }
+}
+
+Write-Host "🎉 Test execution completed successfully!" -ForegroundColor Green

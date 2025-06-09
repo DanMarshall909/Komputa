@@ -16,7 +16,7 @@ public class MemoryAwareConversationSteps
     private readonly Mock<IContentScorer> _mockContentScorer;
     private readonly Mock<IWebSearchService> _mockWebSearchService;
     private readonly Mock<ILogger<MemoryAwareConversationService>> _mockLogger;
-    private MemoryAwareConversationService _conversationService;
+    private MemoryAwareConversationService? _conversationService;
     private string _userInput = string.Empty;
     private string _assistantResponse = string.Empty;
     private List<MemoryItem> _storedMemories = new();
@@ -40,21 +40,37 @@ public class MemoryAwareConversationSteps
             .Returns(Task.CompletedTask);
 
         _mockMemoryStore.Setup(x => x.GetRecentMemoriesAsync(It.IsAny<int>()))
-            .ReturnsAsync(() => _storedMemories.TakeLast(10).ToList());
+            .ReturnsAsync((int count) => GetRecentMemories(count));
 
         _mockMemoryStore.Setup(x => x.SearchAsync(It.IsAny<string>(), It.IsAny<int>()))
-            .ReturnsAsync(() => _relevantMemories);
+            .ReturnsAsync((string query, int count) => GetSearchResults(count));
 
         _mockMemoryStore.Setup(x => x.GetTopMemoriesAsync(It.IsAny<int>()))
-            .ReturnsAsync(() => _storedMemories.OrderByDescending(m => m.Importance).Take(5).ToList());
+            .ReturnsAsync((int count) => GetTopMemories(count));
+    }
+
+    private IEnumerable<MemoryItem> GetRecentMemories(int count)
+    {
+        var skipCount = Math.Max(0, _storedMemories.Count - count);
+        return _storedMemories.Skip(skipCount);
+    }
+
+    private IEnumerable<MemoryItem> GetSearchResults(int count)
+    {
+        return _relevantMemories.Take(count);
+    }
+
+    private IEnumerable<MemoryItem> GetTopMemories(int count)
+    {
+        return _storedMemories.OrderByDescending(m => m.Importance).Take(count);
     }
 
     [Given(@"the AI provider is available")]
     public void GivenTheAiProviderIsAvailable()
     {
         _mockAiProvider.Setup(x => x.IsAvailable).Returns(true);
-        _mockAiProvider.Setup(x => x.GetResponseAsync(It.IsAny<string>()))
-            .ReturnsAsync((string input) => $"AI response to: {input}");
+        _mockAiProvider.Setup(x => x.GetResponseAsync(It.IsAny<string>(), It.IsAny<List<string>>()))
+            .ReturnsAsync((string input, List<string> context) => $"AI response to: {input}");
 
         _conversationService = new MemoryAwareConversationService(
             _mockMemoryStore.Object,
@@ -101,7 +117,7 @@ public class MemoryAwareConversationSteps
     public async Task WhenIAsk(string question)
     {
         _userInput = question;
-        _assistantResponse = await _conversationService.GetResponseWithMemoryAsync(question);
+        _assistantResponse = await _conversationService!.GetResponseWithMemoryAsync(question);
     }
 
     [Given(@"user input contains ""(.*)""")]
@@ -185,7 +201,7 @@ public class MemoryAwareConversationSteps
     public async Task WhenIAskAboutTemperature()
     {
         _userInput = "What's the temperature?";
-        _assistantResponse = await _conversationService.GetResponseWithMemoryAsync(_userInput);
+        _assistantResponse = await _conversationService!.GetResponseWithMemoryAsync(_userInput);
     }
 
     [Then(@"the assistant should use Celsius in the response")]
