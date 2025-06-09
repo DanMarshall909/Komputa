@@ -5,16 +5,18 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-    </PropertyGroup>
+      <UserSecretsId>e65870d4-984a-455a-ba13-48a3da1c78a9</UserSecretsId>
+  </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.42.0"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.1"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1"/>
-        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1"/>
-        <PackageReference Include="NAudio" Version="2.2.1"/>
-        <PackageReference Include="System.Net.Http.Json" Version="9.0.1"/>
+        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.42.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.5" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="9.0.5" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.1" />
+        <PackageReference Include="NAudio" Version="2.2.1" />
+        <PackageReference Include="System.Net.Http.Json" Version="9.0.1" />
     </ItemGroup>
     <ItemGroup>
         <None Update="appsettings.json">

@@ -1,0 +1,24 @@
+[
+  {
+    "id": "c1c2bb45-0549-4519-851c-327ac73edb49",
+    "content": "hi",
+    "contentType": "userinput",
+    "timestamp": "2025-06-09T02:28:51.2026857Z",
+    "importance": 0.4,
+    "tags": [
+      "greeting"
+    ],
+    "conversationId": "7489a1f6-e58e-450f-90ea-f76e14ae5e6e"
+  },
+  {
+    "id": "d58f4d7d-1661-4b93-a55c-1018b8a49a91",
+    "content": "OpenAI provider is not available - missing API key.",
+    "contentType": "assistantresponse",
+    "timestamp": "2025-06-09T02:28:51.2515379Z",
+    "importance": 0.3,
+    "tags": [
+      "greeting"
+    ],
+    "conversationId": "7489a1f6-e58e-450f-90ea-f76e14ae5e6e"
+  }
+]
