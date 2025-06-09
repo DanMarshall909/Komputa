@@ -1,17 +1,17 @@
 ﻿namespace Komputa;
 
-using System.Net.Http.Json;
-using System.Text.Json.Serialization;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Komputa.Interfaces;
+using Komputa.Services;
 
 class Program
 {
     static async Task Main()
     {
+        Console.WriteLine("🧠 Komputa - Memory-Aware AI Assistant");
+        Console.WriteLine("=====================================");
+
         // Load configuration
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
         var configBuilder = new ConfigurationBuilder()
@@ -24,79 +24,64 @@ class Program
 
         var config = configBuilder.Build();
 
-        // Set up dependency injection
+        // Set up dependency injection with new memory-aware services
         var services = new ServiceCollection()
             .AddSingleton<IConfiguration>(config)
             .AddHttpClient()
-            .AddSingleton<AssistantService>()
+            .AddSingleton<IMemoryStore, JsonMemoryStore>()
+            .AddSingleton<IContentScorer, VoiceAssistantContentScorer>()
+            .AddSingleton<ILanguageModelProvider, OpenAIProvider>()
+            .AddSingleton<MemoryAwareConversationService>()
             .BuildServiceProvider();
 
-        var assistant = services.GetRequiredService<AssistantService>();
+        var conversationService = services.GetRequiredService<MemoryAwareConversationService>();
+        var aiProvider = services.GetRequiredService<ILanguageModelProvider>();
 
-        Console.WriteLine("Welcome to Komputa - Your AI Assistant!");
+        Console.WriteLine($"🤖 AI Provider: {aiProvider.ProviderName} ({(aiProvider.IsAvailable ? "Available" : "Not Available")})");
+        Console.WriteLine("💭 Memory system initialized");
+        Console.WriteLine();
+        
+        if (!aiProvider.IsAvailable)
+        {
+            Console.WriteLine("⚠️  Warning: AI provider not available. Please check your configuration.");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Commands:");
+        Console.WriteLine("- Type 'memory' to check conversation memory");
+        Console.WriteLine("- Type 'exit' to quit");
+        Console.WriteLine();
 
         while (true)
         {
             Console.Write("You: ");
             string? input = Console.ReadLine();
 
-            if (string.IsNullOrWhiteSpace(input) || input.Equals("exit", StringComparison.OrdinalIgnoreCase))
+            if (string.IsNullOrWhiteSpace(input))
+                continue;
+
+            if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
             {
-                Console.WriteLine("Goodbye!");
+                Console.WriteLine("👋 Goodbye!");
                 break;
             }
 
-            string response = await assistant.GetResponseAsync(input);
-            Console.WriteLine($"Komputa: {response}");
+            if (input.Equals("memory", StringComparison.OrdinalIgnoreCase))
+            {
+                var memoryStatus = await conversationService.GetMemoryStatusAsync();
+                Console.WriteLine($"💭 Memory Status: {memoryStatus}");
+                continue;
+            }
+
+            try
+            {
+                string response = await conversationService.GetResponseWithMemoryAsync(input);
+                Console.WriteLine($"Komputa: {response}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error: {ex.Message}");
+            }
         }
     }
-}
-
-public class AssistantService
-{
-    private readonly HttpClient _httpClient;
-    private readonly string _apiKey;
-
-    public AssistantService(HttpClient httpClient, IConfiguration configuration)
-    {
-        _httpClient = httpClient;
-        _apiKey = configuration["OpenAI:ApiKey"] ??
-                  throw new InvalidOperationException("OpenAI API key is missing from configuration.");
-        _httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_apiKey}");
-    }
-
-    public async Task<string> GetResponseAsync(string prompt)
-    {
-        var request = new
-        {
-            model = "gpt-4",
-            messages = new[] { new { role = "user", content = prompt } }
-        };
-
-        var response = await _httpClient.PostAsJsonAsync("https://api.openai.com/v1/chat/completions", request);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            return $"Error: {response.StatusCode} - {await response.Content.ReadAsStringAsync()}";
-        }
-
-        var result = await response.Content.ReadFromJsonAsync<OpenAiResponse>();
-
-        return result?.Choices?.FirstOrDefault()?.Message?.Content ?? "No response";
-    }
-}
-
-public class OpenAiResponse
-{
-    [JsonPropertyName("choices")] public List<Choice>? Choices { get; set; }
-}
-
-public class Choice
-{
-    [JsonPropertyName("message")] public Message? Message { get; set; }
-}
-
-public class Message
-{
-    [JsonPropertyName("content")] public string? Content { get; set; }
 }
