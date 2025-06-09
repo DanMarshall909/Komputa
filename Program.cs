@@ -1,11 +1,9 @@
 ﻿namespace Komputa;
 
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.UserSecrets;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Extensions.Logging;
 using Komputa.Interfaces;
 using Komputa.Services;
 
