@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace Komputa.Models;
+namespace Komputa.Domain.Models;
 
 public class MemoryItem
 {

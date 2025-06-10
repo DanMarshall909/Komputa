@@ -1,8 +1,8 @@
 using System.Text.Json;
-using Komputa.Interfaces;
-using Komputa.Models;
+using Komputa.Application.Interfaces;
+using Komputa.Domain.Models;
 
-namespace Komputa.Services;
+namespace Komputa.Infrastructure.Services;
 
 public class JsonMemoryStore : IMemoryStore
 {

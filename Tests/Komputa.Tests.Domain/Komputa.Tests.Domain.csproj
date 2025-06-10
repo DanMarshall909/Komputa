@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Komputa.csproj" />
+    <ProjectReference Include="..\..\src\Komputa.Domain\Komputa.Domain.csproj" />
   </ItemGroup>
 
 

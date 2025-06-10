@@ -1,6 +1,6 @@
-using Komputa.Models;
+using Komputa.Domain.Models;
 
-namespace Komputa.Interfaces;
+namespace Komputa.Application.Interfaces;
 
 public interface ILanguageModelProvider
 {

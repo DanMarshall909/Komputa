@@ -1,4 +1,4 @@
-using Komputa.Models;
+using Komputa.Domain.Models;
 
 namespace Komputa.Tests.Domain;
 

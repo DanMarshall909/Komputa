@@ -1,7 +1,8 @@
+using Komputa.Application.Interfaces;
+using Komputa.Domain.Models;
+using Komputa.Infrastructure.Services;
 using Microsoft.Extensions.Logging;
-using Komputa.Services;
-using Komputa.Interfaces;
-using Komputa.Models;
+
 
 namespace Komputa.Tests.Application.StepDefinitions;
 

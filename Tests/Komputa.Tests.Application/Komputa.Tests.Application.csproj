@@ -44,7 +44,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Komputa.csproj" />
+    <ProjectReference Include="..\..\src\Komputa.Domain\Komputa.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Komputa.Application\Komputa.Application.csproj" />
+    <ProjectReference Include="..\..\src\Komputa.Infrastructure\Komputa.Infrastructure.csproj" />
   </ItemGroup>
 
 

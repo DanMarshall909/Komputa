@@ -1,8 +1,8 @@
-using Microsoft.Extensions.Logging;
-using System.Text.Json.Serialization;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using Microsoft.Extensions.Logging;
 
-namespace Komputa.Services;
+namespace Komputa.Infrastructure.Services;
 
 public interface IWebSearchService
 {
