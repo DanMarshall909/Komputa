@@ -1,11 +1,12 @@
-﻿namespace Komputa;
+﻿namespace Komputa.Presentation.ConsoleApp;
 
+using System;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Komputa.Interfaces;
-using Komputa.Services;
+using Komputa.Application.Interfaces;
+using Komputa.Infrastructure.Services;
 
 class Program
 {
