@@ -1,10 +1,10 @@
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
-using Komputa.Interfaces;
+using Komputa.Application.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace Komputa.Services;
+namespace Komputa.Infrastructure;
 
 public class OpenAIProvider : ILanguageModelProvider
 {

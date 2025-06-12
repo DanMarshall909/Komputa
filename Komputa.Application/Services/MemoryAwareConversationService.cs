@@ -1,8 +1,8 @@
-using Komputa.Interfaces;
-using Komputa.Models;
+using Komputa.Application.Interfaces;
+using Komputa.Domain.Entities;
 using Microsoft.Extensions.Logging;
 
-namespace Komputa.Services;
+namespace Komputa.Application.Services;
 
 public class MemoryAwareConversationService
 {

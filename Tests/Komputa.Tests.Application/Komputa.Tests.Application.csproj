@@ -44,7 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Komputa.csproj" />
+    <ProjectReference Include="..\..\Komputa.Application\Komputa.Application.csproj" />
   </ItemGroup>
 
 

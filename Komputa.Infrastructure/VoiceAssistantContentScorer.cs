@@ -1,6 +1,6 @@
-using Komputa.Interfaces;
+using Komputa.Application.Interfaces;
 
-namespace Komputa.Services;
+namespace Komputa.Infrastructure;
 
 public class VoiceAssistantContentScorer : IContentScorer
 {

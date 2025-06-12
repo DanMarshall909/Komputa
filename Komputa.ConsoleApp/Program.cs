@@ -4,8 +4,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Komputa.Interfaces;
-using Komputa.Services;
+using Komputa.Application.Interfaces;
+using Komputa.Infrastructure;
+using Komputa.Application.Services;
 
 class Program
 {
