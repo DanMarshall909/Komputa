@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komputa - AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Komputa</h1>
+            <p class="subtitle">Memory-Aware AI Assistant</p>
+            <div class="status-bar">
+                <span id="connection-status" class="status-indicator">🟢 Connected</span>
+                <button id="memory-btn" class="memory-button">💭 Memory Status</button>
+            </div>
+        </header>
+
+        <div class="chat-container">
+            <div id="chat-messages" class="chat-messages">
+                <div class="message assistant-message">
+                    <div class="message-header">
+                        <span class="message-sender">Komputa</span>
+                        <span class="message-time" id="welcome-time"></span>
+                    </div>
+                    <div class="message-content">
+                        Hello! I'm Komputa, your memory-aware AI assistant. I can remember our conversations and provide contextual responses. How can I help you today?
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <textarea
+                    id="user-input"
+                    placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+                    rows="1"
+                ></textarea>
+                <button id="send-btn" class="send-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
